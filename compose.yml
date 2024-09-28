@@ -1,0 +1,10 @@
+services:
+  nginx:
+    build: .
+    ports:
+      - 443:123
+    networks:
+      - koeg-dev
+networks:
+  koeg-dev:
+    external: true
