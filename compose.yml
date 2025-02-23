@@ -5,6 +5,11 @@ services:
       - 443:443
     networks:
       - koeg-dev
+    volumes:
+      - koeg-dev-ssl:/ssl/
 networks:
   koeg-dev:
+    external: true
+volumes:
+  koeg-dev-ssl:
     external: true
