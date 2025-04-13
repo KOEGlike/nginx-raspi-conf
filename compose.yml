@@ -1,5 +1,6 @@
 services:
   nginx:
+    restart: always
     build: .
     ports:
       - 443:443
