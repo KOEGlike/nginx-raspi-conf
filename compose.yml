@@ -1,5 +1,5 @@
 services:
-  nginx:
+  nginx-general:
     image: nginx:stable-bookworm-perl
     restart: always
     ports:
@@ -8,7 +8,33 @@ services:
       - koeg-dev
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - koeg-dev-ssl:/ssl/
+      - koeg-dev-ssl:/ssl
+    depends_on:
+      - nginx-mc
+      - nginx-pc
+  nginx-mc:
+    image: nginx:stable-bookworm-perl
+    restart: always
+    networks:
+      - koeg-dev
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx-mc.conf:ro
+    network_mode: "host"
+  nginx-pc:
+    image: nginx:stable-bookworm-perl
+    restart: always
+    networks:
+      - koeg-dev
+    volumes:
+      - ./nginx-pc.conf:/etc/nginx/nginx-pc.conf:ro
+    depends_on:
+      - wol-script
+    # Remove network_mode to use Docker's internal networking
+  wol-script:
+    build: ./wol-script
+    restart: always
+    ports:
+      - 5000:5000  # Correct port mapping for Flask
 networks:
   koeg-dev:
     external: true
