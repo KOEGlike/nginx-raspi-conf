@@ -4,7 +4,7 @@ from wakeonlan import send_magic_packet
 app = Flask(__name__)
 
 # Replace with the MAC address of the target PC
-TARGET_MAC_ADDRESS = "00:11:22:33:44:55"
+TARGET_MAC_ADDRESS = "00:15:5D:05:43:00"
 
 @app.route('/start', methods=['GET'])
 def wake_pc():
