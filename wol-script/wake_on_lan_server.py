@@ -1,11 +1,12 @@
 from flask import Flask, jsonify
 from wakeonlan import send_magic_packet
+import os
 
 app = Flask(__name__)
 
-# Replace with the MAC address of the target PC
-TARGET_MAC_ADDRESS = "00:15:5D:05:43:00"
-TARGET_IP_ADDRESS="192.168.5.213"
+# Get the MAC and IP address from environment variables
+TARGET_MAC_ADDRESS = os.getenv("TARGET_MAC_ADDRESS")
+TARGET_IP_ADDRESS = os.getenv("TARGET_IP_ADDRESS")
 
 @app.route('/start', methods=['GET'])
 def wake_pc():
