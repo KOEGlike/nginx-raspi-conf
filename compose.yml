@@ -1,28 +1,14 @@
 services:
-  nginx-general:
+  nginx:
     image: nginx:stable-bookworm-perl
     restart: always
     ports:
       - 443:443
-    networks:
-      - koeg-dev
+      - 3389:3389
+      - 25565:25565
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - koeg-dev-ssl:/ssl
-    depends_on:
-      - nginx-mc
-      - nginx-pc
-  nginx-mc:
-    image: nginx:stable-bookworm-perl
-    restart: always
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx-mc.conf:ro
-    network_mode: "host"
-  nginx-pc:
-    image: nginx:stable-bookworm-perl
-    restart: always
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx-pc.conf:ro
     depends_on:
       - wol-script
     network_mode: "host"
@@ -30,10 +16,7 @@ services:
     build: ./wol-script
     restart: always
     ports:
-      - 5000:5000  
-networks:
-  koeg-dev:
-    external: true
+      - 5000:5000
 volumes:
   koeg-dev-ssl:
     external: true
