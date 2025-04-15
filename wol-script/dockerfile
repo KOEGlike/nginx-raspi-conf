@@ -17,7 +17,7 @@ RUN cargo build --release
 FROM debian:bullseye-slim
 
 # Install necessary dependencies and update glibc
-RUN apt-get update && apt-get install -y libssl-dev wget && \
+RUN apt-get update && apt-get install -y libssl-dev wget gcc make && \
     wget http://ftp.gnu.org/gnu/libc/glibc-2.34.tar.gz && \
     tar -xvzf glibc-2.34.tar.gz && \
     cd glibc-2.34 && \
