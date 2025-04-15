@@ -15,8 +15,6 @@ services:
   wol-script:
     build: ./wol-script
     restart: always
-    ports:
-      - 5000:5000
     network_mode: "host"
     env_file: 
       - .env
