@@ -1,8 +1,6 @@
-use axum::Json;
 use axum::{Router, extract::State, routing::get};
-use std::convert::TryInto;
 use std::env;
-use std::net::{Ipv4Addr, SocketAddrV4};
+use std::net::SocketAddrV4;
 use tokio::net::TcpListener;
 use wakey::WolPacket;
 
